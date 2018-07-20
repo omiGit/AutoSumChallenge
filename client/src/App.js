@@ -11,10 +11,15 @@ class App extends Component {
     this.props.fetchExpenses();
   }
   render() {
+    const expenseList = !this.props.expenses.length?'Add Category':<ExpenseList 
+    expenses = {this.props.expenses}
+    removeExpense = {this.props.removeExpense}/>
     return (
       <div className="App">
-        <Form onSubmit={this.props.postExpense}/>
-        <ExpenseList expenses = {this.props.expenses}/>
+        <Form onSubmit={this.props.postExpense} 
+        categories={this.props.expenses.map(e=>e.category)}
+        loading={this.props.loader}/>
+        {expenseList}
       </div>
     );
   }

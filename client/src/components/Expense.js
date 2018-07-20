@@ -1,9 +1,12 @@
 import React from 'react';
 
-export default ({category,paymentType,date})=>{
+export default ({id,category,paymentType,date,remove})=>{
+    console.log(id);
+    const removeExpense = ()=>remove(id);
     return (
         <div>
-            {category}
+           
+            {category}  <span onClick={removeExpense}> remove </span>
         </div>    
     )
 }

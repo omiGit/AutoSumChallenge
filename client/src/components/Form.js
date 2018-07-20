@@ -4,6 +4,10 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
 export default class Form extends Component {
+  constructor(props){
+    super(props);
+    this.categoryRef = React.createRef();
+  }
   state={
     category:'',
     paymentType:'',
@@ -15,25 +19,32 @@ export default class Form extends Component {
     const category = (e.target.value !== 'select' && e.target.value)||''
     this.setState({category});
   };
-  
+
   getType = e=>this.setState({paymentType:e.target.value})
 
   getDate = date=>this.setState({date});
 
-  onSubmit = e=>{e.preventDefault();this.props.onSubmit({...this.state,date:this.state.date.valueOf()})}
+  onSubmit = e=>{
+    e.preventDefault();
+    this.props.onSubmit({...this.state,date:this.state.date.valueOf()});
+    this.categoryRef.current.focus();
+  }
 
   render() {
     console.log(this.state);
+    const categories = this.props.categories.map((c,i)=><option key={c+i} value={c}>{c}</option>);
     return (
       <div>
         <form name="expenseForm" onSubmit={this.onSubmit}>
         <input type = 'text' name='category'
          value={this.state.category}
-         onChange={this.getCategory} required/>
+         onChange={this.getCategory}
+         ref={this.categoryRef}
+         required/>
 
         <select onChange={this.chooseCategory}>
             <option value='select'>select</option>
-            <option value='ankit'>Ankit</option>
+            {categories}
         </select> 
 
         <input type='radio' name='paymentType' 
@@ -49,11 +60,10 @@ export default class Form extends Component {
         selected={this.state.date}
         onChange={this.getDate}
         />
-
-        <button>Submit</button>
+        <button disabled={this.props.loading}>Submit</button>
         </form>
 
-        {this.props.loader && 'loading....'}
+       
       </div>
     )
   }

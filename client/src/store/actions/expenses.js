@@ -26,3 +26,17 @@ export const fetchExpenses = ()=>async dispatch=>{
     console.log(e);
   }
 }
+
+export const removeExpense = (id)=>async dispatch=>{
+  dispatch({type:actionType.SET_LOADER});
+  let  response;
+  console.log(id);
+  try{
+  response = await axios.delete(`/expenses/${id}`);
+  dispatch({type:actionType.REMOVE_EXPENSE,payload:id});
+  console.log(response.data);
+  }catch(e){
+    //dispatch({type:actionType.SET_ERROR});\
+    console.log(e);
+  }
+}
