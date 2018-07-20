@@ -13,7 +13,6 @@ module.exports = app =>{
 
     app.delete('/expenses/:id',(req,res)=>{
         const {id} = req.params;
-        console.log(id.toString());
         Expense.findByIdAndRemove(id)
         .then(e=>res.send({done:true}))
         .catch(e=>{console.log(e);res.send({error:'Expense was not deleted'});});
@@ -22,7 +21,6 @@ module.exports = app =>{
 
     app.patch('/expenses',(req,res)=>{
         const {_id,...expense} = req.body;
-        console.log(_id,expense);
         Expense.findOneAndUpdate({_id},expense,{new:true})
         .then(e=>res.send({done:true}))
         .catch(e=>res.send({error:'Expense was not updated'}))

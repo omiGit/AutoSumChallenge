@@ -34,7 +34,16 @@ export default class Form extends Component {
     else{
       this.props.onSubmit({...this.state,date:this.state.date.valueOf()});
     }
+    this.reset();
     this.categoryRef.current.focus();
+  }
+
+  reset=()=>{
+    this.setState({category:'',
+    paymentType:'',
+    date: moment(),
+    id:'',
+    udate:false});
   }
 
   componentWillUpdate(nextProps,nextState){
@@ -50,17 +59,22 @@ export default class Form extends Component {
     const categories = this.props.categories.map((c,i)=><option key={c+i} value={c}>{c}</option>);
     return (
       <div>
+        
         <form name="expenseForm" onSubmit={this.onSubmit}>
+        <label> Category </label>
         <input type = 'text' name='category'
          value={this.state.category}
          onChange={this.getCategory}
          ref={this.categoryRef}
+         tabIndex={1}
+         autoFocus={true}
          required/>
 
         <select onChange={this.chooseCategory}>
             <option value='select'>select</option>
             {categories}
-        </select> 
+        </select> <br/>
+        <label>Payment Type : </label>
         <input type='radio' name='paymentType' 
         value='credit'
         name="paymentMethod"
@@ -68,12 +82,13 @@ export default class Form extends Component {
         checked={this.state.paymentType === 'credit'?true:null}
         required
         /> Credit Card 
-        <input type='radio' name='paymentType' 
+        <input style={{marginLeft:'15px'}} type='radio' name='paymentType' 
         value='cash'
         name="paymentMethod"
         checked={this.state.paymentType === 'cash'?true:null}
         onClick={this.getType}/> Cash
-
+        <br/>
+        <label>Select Date</label>
         <DatePicker
         selected={this.state.date}
         onChange={this.getDate}
