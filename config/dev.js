@@ -1,7 +1,7 @@
 module.exports = {
     
     db:{
-        uri: `mongodb://omkar:omkar@ds237858.mlab.com:37858/email-express`
+        uri: `mongodb://omkar:omkar25@ds237120.mlab.com:37120/expenses`
     }
 
 }
