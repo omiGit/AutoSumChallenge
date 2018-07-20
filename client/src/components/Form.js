@@ -1,15 +1,13 @@
 import React, { Component } from 'react'
 import moment from 'moment';
 import DatePicker from 'react-datepicker';
-import {connect} from 'react-redux';
-import * as actions from '../store/actions/expenses';
 import 'react-datepicker/dist/react-datepicker.css';
 
-class Form extends Component {
+export default class Form extends Component {
   state={
     category:'',
-    date: moment(),
-    type:''
+    paymentType:'',
+    date: moment()
   }
   getCategory=e=>this.setState({category:e.target.value})
 
@@ -18,11 +16,11 @@ class Form extends Component {
     this.setState({category});
   };
   
-  getType = e=>this.setState({type:e.target.value})
+  getType = e=>this.setState({paymentType:e.target.value})
 
   getDate = date=>this.setState({date});
 
-  onSubmit = e=>{e.preventDefault();this.props.postExpense({...this.state,date:this.state.date.valueOf()})}
+  onSubmit = e=>{e.preventDefault();this.props.onSubmit({...this.state,date:this.state.date.valueOf()})}
 
   render() {
     console.log(this.state);
@@ -60,4 +58,3 @@ class Form extends Component {
     )
   }
 }
-export default connect(({loader})=>({loader}),actions)(Form);

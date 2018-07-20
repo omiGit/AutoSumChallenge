@@ -5,11 +5,7 @@ const path = require('path');
 
 app.use(bodyParser.json());
 
-app.post('/expenses',(req,res)=>{
-    const expense = req.body;
-    console.log(expense);
-    res.send({done:true});
-})
+require('./server/routes/expense')(app);
 
 if(process.env.NODE_ENV === 'production'){
     app.use(express.static('client/build'));
