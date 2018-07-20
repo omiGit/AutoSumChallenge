@@ -13,4 +13,5 @@ if(process.env.NODE_ENV === 'production'){
         res.sendFile(path.resolve(__dirname,'client','build','index.html'));
     });
 }
-app.listen(5000,()=>console.log('Localhost connected: localhost:5000/ '));
+ 
+app.listen(app.listen(process.env.PORT || 5000),()=>console.log('Localhost connected: localhost:5000/ '));
