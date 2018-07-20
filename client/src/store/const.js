@@ -7,9 +7,5 @@ export const SET_LOADER = "SET_LOADER";
 export const SET_ERROR = "SET_ERROR"; 
 export const SET_CLEARCATEGORY = "SET_CLEARCATEGORY";
 
-//Form's constatnt
-
-export const SET_CATEGORY = "SET_CATEGORY";
-export const SET_PAYMENTTYPE = "SET_PAYMENTTYPE";
 
 

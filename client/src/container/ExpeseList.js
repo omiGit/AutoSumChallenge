@@ -6,7 +6,6 @@ const ExpenseList = ({expenses, removeExpense,getCategory}) => {
   
     const expensesList = expenses.map(e=>
     {
-        
         return <Expense id={e._id} 
         remove={removeExpense} 
         key={e._id} 
