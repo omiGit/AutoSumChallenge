@@ -1,5 +1,12 @@
 import * as actionType from '../const';
+const initCategory= {
+    _id:'',
+    category:'',
+    paymentType:'',
+    date:''
+}
 const initState = {
+   updateValues:initCategory,
    expenses: [],
    loader:false,
    error:''
@@ -22,7 +29,19 @@ export default (state=initState,action)=>{
             const expenses = state.expenses.filter(e=>e._id !== action.payload);
             return {...state,expenses,loader:false}
         }
-            
+        case actionType.SET_UPDATEVALUES:{
+            console.log({...state,updateValues:{...action.payload}});
+            return {...state,updateValues:{...action.payload}}
+        }
+        case actionType.UPDATE_EXPENSE:{
+            const expenses = state.expenses.map(e=>{
+                if(e._id === action.payload._id){
+                 e={...action.payload}   
+                }return e});
+            return {...state,expenses,loader:false}
+        }
+        case actionType.SET_CLEARCATEGORY:
+            return {...state, updateValues:initCategory}
         
         default:
         return initState

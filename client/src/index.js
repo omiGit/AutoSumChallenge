@@ -5,7 +5,7 @@ import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import {Provider} from 'react-redux'
 import store from './store';
-console.log(store.getState());
+
 const AutoSumChallenge = ()=>(
     <Provider store={store}>
         <App/>
